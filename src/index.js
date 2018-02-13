@@ -3,15 +3,15 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.css';
 import 'axios';
-// import VueRouter from 'vue-router';
-// import router from './routes';
-// import App from './views/app.vue';
+import VueRouter from 'vue-router';
+import router from './routes';
+import App from './views/app.vue';
 // import Drawer from './views/drawer.vue';
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
 
-// init fb
+// init google
 var self = this;
 const Config = {
     google: {
@@ -19,21 +19,37 @@ const Config = {
     }
 };
 
-// Vue.use(VueRouter);
+// router.beforeEach((to, from, next) => {
+//     console.log('router.beforeEach');
+//     console.log(from);
+//     console.log(to);
+//     // redirect to login if account unknown
+//     if (!window.account && to.name != 'login') {
+//         console.log('Redirect');
+//         router.push('login');
+//     } else
+//         next();
+// });
+
+// router.beforeResolve ((to, from) => {
+//     console.log('router.beforeResolve');
+// });
+
+
+Vue.use(VueRouter);
+initVue();
 
 function initVue() {
     return new Vue({
         el: '#app',
         components: {
-            Drawer
+            // Drawer
         },
         // store,
         render: h => h(App),
-        // router: router,
-        data: {
-        },
-        methods: {
-        },
+        router: router,
+        data: {},
+        methods: {},
         mounted() {}
     });
 }
