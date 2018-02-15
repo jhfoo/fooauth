@@ -1,5 +1,5 @@
 import Vue from 'vue';
-// import store from './store';
+import store from './store';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.css';
 import 'axios';
@@ -19,17 +19,32 @@ const Config = {
     }
 };
 
-// router.beforeEach((to, from, next) => {
-//     console.log('router.beforeEach');
-//     console.log(from);
-//     console.log(to);
-//     // redirect to login if account unknown
-//     if (!window.account && to.name != 'login') {
-//         console.log('Redirect');
-//         router.push('login');
-//     } else
-//         next();
-// });
+router.$store = store;
+router.beforeEach((to, from, next) => {
+    console.log('router.beforeEach');
+    console.log(router.$store.state.version);
+    console.log(Object.keys(router.$store.state.account).length === 0);
+    console.log(from);
+    console.log(to);
+    // redirect to login if account unknown
+    const prelogin = ['dummy'];
+    console.log('prelogin: ' + (prelogin.includes(to.name)));
+    if (prelogin.includes(to.name))
+        next();
+    else {
+        if (Object.keys(router.$store.state.account).length === 0 &&
+            to.name != 'login') {
+            console.log('Redirect');
+            router.push({
+                name: 'login',
+                params: {
+                    message: 'Page accessible after login.'
+                }
+            });
+        } else
+            next();
+    }
+});
 
 // router.beforeResolve ((to, from) => {
 //     console.log('router.beforeResolve');
@@ -45,7 +60,7 @@ function initVue() {
         components: {
             // Drawer
         },
-        // store,
+        store,
         render: h => h(App),
         router: router,
         data: {},

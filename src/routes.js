@@ -6,6 +6,8 @@ var routes = [
     {
         path:'/',
         name: 'home',
+        alias:'/home',
+        props: true,
         component: Home
     },
     {
