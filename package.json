@@ -1,6 +1,6 @@
 {
-    "name": "smartphotoframe2",
-    "version": "0.0.93",
+    "name": "fooauth",
+    "version": "0.0.329",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -29,14 +29,14 @@
         "css-loader": "^0.28.7",
         "moment": "^2.20.1",
         "style-loader": "^0.19.1",
-        "vue-loader": "^13.6.2",
+        "vue-loader": "^14.1.1",
         "vue-template-compiler": "^2.5.13",
-        "vuetify": "^0.17.6",
+        "vuetify": "^1.0.0",
         "vuex": "^3.0.1",
         "webpack": "^3.10.0",
         "webpack-auto-inject-version": "^1.0.0",
         "webpack-bundle-analyzer": "^2.9.1",
-        "webpack-dev-server": "^2.9.7"
+        "webpack-dev-server": ">2.9.7"
     },
     "bugs": {
         "url": "https://github.com/jhfoo/smartphotoframe2/issues"

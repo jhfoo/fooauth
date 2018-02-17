@@ -2,11 +2,13 @@
     <div>
         Dummy home page<br/>
         Message: {{message}}<br/>
-        <router-link to="login" message="From home">Login</router-link>
+        <router-link :to="{ name:'login', params:{autoroute:false}}">Login</router-link>
     </div>
 </template>
 
 <script>
+    // , params:{action:'NO_AUTOROUTE'}}
+
     export default {
         name: 'Home',
         props:['message'],

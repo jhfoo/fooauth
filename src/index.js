@@ -16,20 +16,20 @@ var self = this;
 const Config = {
     google: {
         ClientId: '554533026497-rd0ch5t2scdb24urfun080omht7vmrl3.apps.googleusercontent.com'
+    },
+    vue: {
+        prelogin: ['dummy']
     }
 };
 
 router.$store = store;
 router.beforeEach((to, from, next) => {
     console.log('router.beforeEach');
-    console.log(router.$store.state.version);
-    console.log(Object.keys(router.$store.state.account).length === 0);
     console.log(from);
     console.log(to);
     // redirect to login if account unknown
-    const prelogin = ['dummy'];
-    console.log('prelogin: ' + (prelogin.includes(to.name)));
-    if (prelogin.includes(to.name))
+    console.log('prelogin: ' + (Config.vue.prelogin.includes(to.name)));
+    if (Config.vue.prelogin.includes(to.name))
         next();
     else {
         if (Object.keys(router.$store.state.account).length === 0 &&

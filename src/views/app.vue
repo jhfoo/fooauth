@@ -6,6 +6,8 @@
 
 <template>
     <v-app>
+        <Appbar></Appbar>
+        <Drawer></Drawer>
         <v-content>
             <router-view></router-view>
         </v-content>
@@ -13,24 +15,27 @@
 </template>
 
 <script>
+    import Appbar from './appbar.vue';
+    import Drawer from './drawer.vue';
+
     export default {
         name: 'App',
-        mounted () {
+        components: {
+            Appbar, Drawer
+        },
+        mounted() {
             console.log('app.mounted');
         },
         beforeRouteEnter: (to, from, next) => {
             console.log('app.beforeRouteEnter');
         },
-        beforeRouteUpdate (to, from,next) {
+        beforeRouteUpdate(to, from, next) {
             console.log('app.beforeRouteUpdate');
         },
         beforeRouteLeave: (to, from, next) => {
             console.log('app.beforeRouteLeave');
         },
-        components: {
-        },
-        computed: {
-        },
+        computed: {},
         data() {
             return {
             }

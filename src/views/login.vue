@@ -5,7 +5,7 @@
         <v-layout row>
             <v-flex xs12 sm6 md4 lg3 offset-sm5 offset-md7 offset-lg8>
                 <br/>
-                <br/>
+                <br/> {{translate('LOGIN_WELCOME')}}
                 <div id="my-signin2" data-onsuccess="onSignIn"></div>
                 <a href="#" @click="signOut">Sign out from Gooogle</a>
                 <router-link to="dummy" message="ooi">Dummy</router-link> |
@@ -28,11 +28,22 @@
     export default {
         name: 'Login',
         components: {},
-        props: ['message', 'test'],
+        props: ['message', 'autoroute'],
+        data() {
+            return {
+                auth2: null,
+                snackbar: {
+                    timeout: 3 * 1000,
+                    text: '',
+                    isShow: false
+                }
+            }
+        },
         mounted() {
             console.log('login.mounted');
             var self = this;
 
+            this.setDrawerDisplay(false);
             if (this.message) {
                 this.snackbar.text = this.message;
                 this.snackbar.isShow = true;
@@ -55,22 +66,15 @@
                 'onfailure': this.onLoginFailure
             });
         },
-        data() {
-            return {
-                auth2: null,
-                snackbar: {
-                    timeout: 3 * 1000,
-                    text: '',
-                    isShow: false
-                }
-            }
-        },
         beforeRouteLeave(to, from, next) {
             next();
         },
         computed: {},
         methods: {
-            ...mapMutations(['setAccount']),
+            ...mapMutations(['setAccount', 'setLanguage', 'setDrawerDisplay']),
+            translate(StringId) {
+                return this.$store.state.i18n[this.$store.state.i18n.selected][StringId];
+            },
             onHome() {
                 this.$router.push({
                     name: 'home',
@@ -91,11 +95,13 @@
                 console.log('Image URL: ' + profile.getImageUrl());
                 console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
 
-                console.log(this);
                 this.setAccount({
                     UserId: profile.getId()
                 });
 
+                console.log('action:' + this.autoroute);
+                if (this.autoroute === false) {} else
+                    this.$router.push('home');
             },
             onLoginFailure() {
                 console.log('login.onLoginFailure');
